@@ -3,11 +3,15 @@
 The corpus is the moat. Its value is not that the numbers are impressive — it is
 that a reader can tell, for any single figure, where it came from and when.
 
-Every published e-commerce fee table we examined fails this. Nexscope's
-`profit-margin-calculator-amazon` hardcodes flat rates with no date, no source,
-and no tiering, so its apparel figure has been wrong for years and nothing in
-the file can reveal that. That is the failure mode this document exists to
-prevent in our own work.
+Nearly every published e-commerce fee table we examined fails this. The common
+pattern is a hardcoded flat rate with no date, no source, and no tiering — so
+the apparel figure goes wrong the first time Amazon restructures a bracket, and
+nothing in the file can reveal that it has. The table keeps returning a number,
+confidently, forever.
+
+That is the failure mode this document exists to prevent in our own work. It is
+easy to be smug about it and hard to avoid; the only defence is a protocol that
+makes staleness visible.
 
 ## The rule
 
