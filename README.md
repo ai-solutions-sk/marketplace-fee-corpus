@@ -41,9 +41,17 @@ Because apparel re-rates the whole price at a bracket boundary, there are bands
 where charging more earns less:
 
 ```
-$15.01 – $15.82   worse than pricing at $15.00
-$20.01 – $21.68   worse than pricing at $20.00
+Clothing & Accessories    $15.01 – $15.82    worse than $15.00
+                          $20.01 – $21.68    worse than $20.00
+Beauty, Health & Personal $10.01 – $10.81    worse than $10.00
 ```
+
+**Check the category, not the shelf.** The Amazon browse department a product
+appears under is *not* its referral category. Headbands returned by a search in
+the fashion department routinely classify under Beauty, Health & Personal Care
+— different brackets, different dead zone, or none at your price. Breadcrumb
+and page title can also disagree with each other. Verify per ASIN before
+trusting any figure.
 
 `$20.99` — one of the most common price points in retail — nets **$0.58/unit
 less** than `$20.00`. An apparel seller sitting anywhere in those bands is

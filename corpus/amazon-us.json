@@ -42,6 +42,7 @@
       "toys_and_games": 0.15,
       "baby": 0.15,
       "sports_and_outdoors": 0.15,
+      "_sports_and_outdoors_note": "CONFIRMED primary 2026-08-19 via sell.amazon.com/pricing — flat 15%, no brackets, therefore no dead zone.",
       "office_products": 0.15,
       "automotive": 0.12,
       "industrial_and_scientific": 0.12,
@@ -71,6 +72,20 @@
         ],
         "_worked_example": "A $10.00 shirt pays $0.50 (5% of the whole price), not the $1.70 a flat-17% model reports.",
         "_divergence_example": "A $30.00 shirt: whole_price gives $5.10; marginal would give $3.45. The two modes disagree by $1.65 on one unit — which is why the mode, not the rates, is the thing to verify."
+      },
+
+      "beauty_health_personal_care": {
+        "mode": "whole_price",
+        "_mode_confidence": "high — CONFIRMED against primary.",
+        "_source_tier": "primary",
+        "_sources": ["https://sell.amazon.com/pricing"],
+        "_retrieved": "2026-08-19",
+        "_verbatim": "8% for products with a total sales price of $10.00 or less, and 15% for items with a total sales price greater than $10.00",
+        "_why_it_matters": "Hair accessories, including most headbands, classify here rather than under Clothing and Accessories. The Amazon browse department shown in search is NOT the referral category — this was found the hard way, by checking listings that a fashion-department search had returned.",
+        "brackets": [
+          { "up_to_usd": 10.00, "rate": 0.08 },
+          { "up_to_usd": null,  "rate": 0.15 }
+        ]
       },
 
       "jewelry": {
