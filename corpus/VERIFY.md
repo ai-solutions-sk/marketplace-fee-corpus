@@ -47,11 +47,11 @@ paid for.
 
 ## Open items, highest risk first
 
-- [ ] Per-tier, per-weight-band base fulfillment rates. Absent entirely. This is
-      now the top blocker: without it we can classify a tier and name a boundary
-      miss, but cannot state what the miss *costs*. Secondary sources put the
-      Large→Small standard saving around $0.88–$2.64/unit; we should not quote a
-      figure in that range until it comes off the rate card.
+- [ ] **Peak 2026 rate card** (2026-10-15 to 2027-01-14). Not captured, and peak
+      starts roughly eight weeks from now. Every fulfillment figure we quote
+      goes stale on 15 October.
+- [ ] Dangerous-goods rate card; Large standard above 2.75 lb; all bulky and
+      extra-large tiers; the Low-Price FBA programme card.
 - [ ] Small Bulky / Large Bulky dimensional boundaries after the 2026-01-15
       split. `lib/size-tier.mjs` refuses to classify into these on purpose.
 - [ ] Per-category minimum referral fee overrides.
@@ -80,4 +80,5 @@ most stable numbers here. Fulfillment fees moved twice in 2026 alone
 
 | Date | Item | Outcome |
 |---|---|---|
+| 2026-08-20 | FBA base fulfillment rates | Captured primary off the Seller Central 2026 rate card (`GABBX6GZPA8MSZGW`) into `corpus/amazon-us-fba-fees.json` — both the standard and apparel cards, small and large standard, all three price bands, non-peak. This unblocks pricing a size-tier miss: previously we could name the boundary but not what clearing it was worth. A 14oz apparel unit at $20.95 saves **$1.00/unit** including the 3.5% surcharge. Note a signed-in Seller Central account reaches these help pages even when the business is unverified; the Revenue Calculator does not. |
 | 2026-08-19 | `apparel.mode` / `jewelry.mode` | Confirmed against `sell.amazon.com/pricing` (primary). Apparel is `whole_price` — "products with a total sales price"; jewelry is `marginal` — "portion of the total sales price". Two structures, one table, distinguished only by wording. Our inferred value was correct; both promoted to `primary` with verbatim quotes recorded. |
