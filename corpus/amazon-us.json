@@ -58,7 +58,12 @@
 
       "apparel": {
         "mode": "whole_price",
-        "_mode_confidence": "medium — inferred from the characteristic 'total sales price' phrasing rather than read off the primary rate card. MUST be confirmed before client use; if wrong, every apparel figure we quote is wrong.",
+        "_mode_confidence": "high — CONFIRMED against primary.",
+        "_source_tier": "primary",
+        "_sources": ["https://sell.amazon.com/pricing"],
+        "_retrieved": "2026-08-19",
+        "_verbatim": "5% for products with a total sales price of $15.00 or less · 10% for products with a total sales price greater than $15.00 and less than or equal to $20.00 · 17% for products with a total sales price greater than $20.00",
+        "_why_whole_price": "Reads 'products with a total sales price', never 'portion of'. Contrast the jewelry row below, which is explicitly per-portion. The two rows in the same table use different language because they are different structures.",
         "brackets": [
           { "up_to_usd": 15.00, "rate": 0.05 },
           { "up_to_usd": 20.00, "rate": 0.10 },
@@ -70,7 +75,11 @@
 
       "jewelry": {
         "mode": "marginal",
-        "_mode_confidence": "high — 'portion of the total sales price' is explicit marginal phrasing.",
+        "_mode_confidence": "high — CONFIRMED against primary.",
+        "_source_tier": "primary",
+        "_sources": ["https://sell.amazon.com/pricing"],
+        "_retrieved": "2026-08-19",
+        "_verbatim": "20% for the portion of the total sales price up to $250.00, and 5% for any portion of the total sales price greater than $250.00",
         "brackets": [
           { "up_to_usd": 250.00, "rate": 0.20 },
           { "up_to_usd": null,   "rate": 0.05 }

@@ -43,16 +43,11 @@ paid for.
 
 ## Open items, highest risk first
 
-- [ ] **`referral_fees.tiered.apparel.mode`** — currently `whole_price`, inferred
-      from the "total sales price" phrasing rather than read off the rate card.
-      Jewelry's "portion of the total sales price" wording is explicitly
-      marginal, so the two genuinely differ — but if apparel is actually
-      marginal, every apparel figure we quote above $15 is wrong. A $30 shirt
-      is $5.10 under `whole_price` and $3.45 under `marginal`.
-      **Resolve this before any apparel-category client work.**
-- [ ] Per-tier, per-weight-band base fulfillment rates. Absent entirely. Until
-      these land, no absolute fulfillment fee can be computed — only tier
-      classification and boundary proximity.
+- [ ] Per-tier, per-weight-band base fulfillment rates. Absent entirely. This is
+      now the top blocker: without it we can classify a tier and name a boundary
+      miss, but cannot state what the miss *costs*. Secondary sources put the
+      Large→Small standard saving around $0.88–$2.64/unit; we should not quote a
+      figure in that range until it comes off the rate card.
 - [ ] Small Bulky / Large Bulky dimensional boundaries after the 2026-01-15
       split. `lib/size-tier.mjs` refuses to classify into these on purpose.
 - [ ] Per-category minimum referral fee overrides.
@@ -76,3 +71,9 @@ paid for.
 Referral percentages were frozen across 2025 and 2026, which makes them the
 most stable numbers here. Fulfillment fees moved twice in 2026 alone
 (2026-01-15 increases, 2026-04-17 surcharge). Weight the cadence accordingly.
+
+## Resolved
+
+| Date | Item | Outcome |
+|---|---|---|
+| 2026-08-19 | `apparel.mode` / `jewelry.mode` | Confirmed against `sell.amazon.com/pricing` (primary). Apparel is `whole_price` — "products with a total sales price"; jewelry is `marginal` — "portion of the total sales price". Two structures, one table, distinguished only by wording. Our inferred value was correct; both promoted to `primary` with verbatim quotes recorded. |
