@@ -1,0 +1,195 @@
+{
+  "marketplace": "amazon_us",
+  "currency": "USD",
+  "corpus_version": "0.1.0",
+  "generated": "2026-08-19",
+
+  "_provenance_policy": {
+    "why": "Every published fee table we have found in this space is undated and uncited, which is why they silently rot. This corpus makes provenance a first-class field so a stale rate is visible rather than invisible.",
+    "source_tier": {
+      "primary": "Amazon Seller Central rate card or official policy page, read directly.",
+      "secondary": "Reputable third-party aggregator. Directionally reliable, NOT safe to quote to a paying client without primary confirmation.",
+      "inferred": "Derived from other fields in this corpus, not independently sourced."
+    },
+    "rule": "No figure carrying source_tier 'secondary' may appear in a client-facing deliverable until re-verified against primary and promoted. See VERIFY.md."
+  },
+
+  "referral_fees": {
+    "_note": "Amazon froze referral percentages for both 2025 and 2026. These are the most stable numbers in the corpus.",
+    "_source_tier": "secondary",
+    "_sources": [
+      "https://feedvisor.com/university/referral-fee/",
+      "https://sellerprofithub.com/amazon-referral-fees/",
+      "https://www.fbalytic.com/blog/fba-category-referral-fee-guide/"
+    ],
+    "_retrieved": "2026-08-19",
+
+    "minimum_referral_fee_usd": 0.30,
+    "_minimum_note": "Applies to most categories. Some carry no minimum and some carry a higher one — per-category minimums are NOT yet captured here.",
+
+    "flat": {
+      "_shape": "single rate applied to the whole sale price",
+      "electronics": 0.08,
+      "computers": 0.08,
+      "camera_and_photo": 0.08,
+      "video_games": 0.15,
+      "books": 0.15,
+      "home_and_kitchen": 0.15,
+      "beauty_and_personal_care": 0.15,
+      "health_and_household": 0.15,
+      "grocery": 0.15,
+      "pet_supplies": 0.15,
+      "toys_and_games": 0.15,
+      "baby": 0.15,
+      "sports_and_outdoors": 0.15,
+      "office_products": 0.15,
+      "automotive": 0.12,
+      "industrial_and_scientific": 0.12,
+      "default": 0.15
+    },
+
+    "tiered": {
+      "_critical": "Amazon runs TWO different tiered structures and distinguishes them only by wording on the rate card. Conflating them is the most common error in third-party fee calculators, and the reason this corpus separates them explicitly.",
+
+      "_modes": {
+        "whole_price": "One rate, selected by which bracket the total sales price lands in, then applied to the ENTIRE price. Rate-card tell: 'X% for products with a total sales price greater than $N'.",
+        "marginal": "Each bracket's rate applies only to the portion of the price inside that bracket. Rate-card tell: 'X% for the portion of the total sales price up to $N'."
+      },
+
+      "apparel": {
+        "mode": "whole_price",
+        "_mode_confidence": "medium — inferred from the characteristic 'total sales price' phrasing rather than read off the primary rate card. MUST be confirmed before client use; if wrong, every apparel figure we quote is wrong.",
+        "brackets": [
+          { "up_to_usd": 15.00, "rate": 0.05 },
+          { "up_to_usd": 20.00, "rate": 0.10 },
+          { "up_to_usd": null,  "rate": 0.17 }
+        ],
+        "_worked_example": "A $10.00 shirt pays $0.50 (5% of the whole price), not the $1.70 a flat-17% model reports.",
+        "_divergence_example": "A $30.00 shirt: whole_price gives $5.10; marginal would give $3.45. The two modes disagree by $1.65 on one unit — which is why the mode, not the rates, is the thing to verify."
+      },
+
+      "jewelry": {
+        "mode": "marginal",
+        "_mode_confidence": "high — 'portion of the total sales price' is explicit marginal phrasing.",
+        "brackets": [
+          { "up_to_usd": 250.00, "rate": 0.20 },
+          { "up_to_usd": null,   "rate": 0.05 }
+        ],
+        "_worked_example": "A $400.00 piece pays $50.00 + $7.50 = $57.50, not the $80.00 a flat-20% model reports."
+      }
+    },
+
+    "_gaps": [
+      "Per-category minimum referral fee overrides not captured.",
+      "Media closing fee (historically $1.80/unit on books, DVDs, music) not yet confirmed for 2026.",
+      "Categories charging above 20% (up to 45%) not enumerated."
+    ]
+  },
+
+  "fba_size_tiers": {
+    "_note": "The tier boundary is where the money is. A carton a fraction of an inch over a threshold pays an entire tier more on every unit shipped, permanently, and almost no seller audits for it.",
+    "_source_tier": "secondary",
+    "_sources": [
+      "https://dimmath.com/blog/amazon-fba-size-tiers-smalllargeoversize-full-chart/",
+      "https://redstagfulfillment.com/amazon-fba-oversized-fees/",
+      "https://boxvolumecalculator.com/blog/fba-dim-weight-guide.html"
+    ],
+    "_retrieved": "2026-08-19",
+
+    "_evaluation_rule": "Sort the three measured sides descending → longest, median, shortest. An item falls in the first tier whose every limit it satisfies. Shipping weight uses the greater of unit weight and dimensional weight where dim weight applies.",
+
+    "tiers": [
+      {
+        "id": "small_standard",
+        "label": "Small standard",
+        "max_weight_oz": 16,
+        "max_longest_in": 15.0,
+        "max_median_in": 12.0,
+        "max_shortest_in": 0.75,
+        "_boundary_note": "The 0.75in shortest-side limit is the highest-yield boundary on Amazon. Poly-bagging instead of boxing, or trimming insert thickness, routinely moves a product from Large standard to Small standard."
+      },
+      {
+        "id": "large_standard",
+        "label": "Large standard",
+        "max_weight_lb": 20,
+        "max_longest_in": 18.0,
+        "max_median_in": 14.0,
+        "max_shortest_in": 8.0
+      },
+      {
+        "id": "bulky",
+        "label": "Bulky (split into Small Bulky / Large Bulky on 2026-01-15)",
+        "_incomplete": true,
+        "_note": "Amazon split the former Large Bulky tier into Small Bulky and Large Bulky effective 2026-01-15. Exact dimensional boundaries for the split NOT yet captured — do not compute bulky-tier findings from this corpus."
+      },
+      {
+        "id": "extra_large",
+        "label": "Extra-large",
+        "max_weight_lb": 150,
+        "_overmax": {
+          "trigger": "longest side over 96in, OR length + girth over 130in",
+          "surcharge_usd_range": [17, 25],
+          "effective_from": "2026-01-15"
+        }
+      }
+    ]
+  },
+
+  "fulfillment_fee_changes_2026": {
+    "_source_tier": "secondary",
+    "_sources": [
+      "https://sellersnap.io/amazon-fee-changes-and-updates/",
+      "https://amzprep.com/amazon-fba-fees/",
+      "https://sellerise.com/blog/amazon-fba-fee-changes/"
+    ],
+    "_retrieved": "2026-08-19",
+    "_warning": "Per-tier per-weight-band base fulfillment rates are NOT in this corpus yet. Only the 2026 deltas and surcharges below are captured. Do not compute an absolute fulfillment fee from this file.",
+
+    "increases_effective": "2026-01-15",
+    "increases": [
+      { "scope": "small standard, price 10.00-50.00", "delta_usd": 0.25 },
+      { "scope": "small standard, price above 50.00", "delta_usd": 0.51 },
+      { "scope": "items under 10.00",                 "delta_usd": 0.12 }
+    ],
+
+    "fuel_and_logistics_surcharge": {
+      "rate": 0.035,
+      "applies_to": "base fulfillment fee",
+      "effective_from": "2026-04-17"
+    }
+  },
+
+  "reimbursement_policy": {
+    "_note": "This is the outreach wedge. It is opt-in, most sellers have not done it, and it silently discounts every future claim they file.",
+    "_source_tier": "secondary",
+    "_sources": [
+      "https://www.carbon6.io/blog/amazon-cost-based-reimbursement-update/",
+      "https://sellerise.com/blog/amazon-cost-based-reimbursement-policy-update/",
+      "https://www.ecomengine.com/blog/fba-reimbursement-policy"
+    ],
+    "_retrieved": "2026-08-19",
+
+    "basis": "product_manufacturing_cost",
+    "basis_effective_from": "2025-03-10",
+    "_basis_note": "Previously reimbursed at sale price. Manufacturing cost excludes shipping, handling, customs duties.",
+
+    "seller_declared_cost": {
+      "is_opt_in": true,
+      "where": "Inventory Defect and Reimbursement portal → Manage Your Manufacturing Cost",
+      "if_not_declared": "Amazon substitutes its own estimate derived from comparable products.",
+      "reported_estimate_shortfall": [0.20, 0.30],
+      "_shortfall_confidence": "secondary, widely repeated across seller-tooling vendors but not independently measured by us. Present as 'reported to run 20-30% low', never as a hard number."
+    },
+
+    "claim_windows_days": {
+      "fulfillment_center_operations": { "from": 0,  "to": 60,  "anchor": "item reported lost or damaged" },
+      "customer_returns":              { "from": 60, "to": 120, "anchor": "customer refund or replacement date" },
+      "removal_lost_in_transit":       { "from": 15, "to": 75,  "anchor": "shipment creation date" }
+    },
+
+    "auto_reimbursement": {
+      "applies_to": "items reported lost in a fulfillment center",
+      "_note": "Amazon now issues these proactively. Recovery services retain value on discrepancies, complex transfers, and ambiguous warehouse events that automation misses."
+    }
+  }
+}
