@@ -41,10 +41,18 @@ Because apparel re-rates the whole price at a bracket boundary, there are bands
 where charging more earns less:
 
 ```
-Clothing & Accessories    $15.01 – $15.82    worse than $15.00
-                          $20.01 – $21.68    worse than $20.00
-Beauty, Health & Personal $10.01 – $10.81    worse than $10.00
+Grocery & Gourmet         $15.01 – $16.22    worse than $15.00   max -$1.04
+Clothing & Accessories    $20.01 – $21.68    worse than $20.00   max -$1.39
+                          $15.01 – $15.82    worse than $15.00   max -$0.74
+Beauty, Health & Personal $10.01 – $10.81    worse than $10.00   max -$0.69
+Baby Products             $10.01 – $10.81    worse than $10.00   max -$0.69
 ```
+
+Those four are the complete set. Every other tiered category on Amazon's rate
+card — Furniture, Watches, Compact Appliances, Electronics Accessories,
+Jewelry — is *marginal*, so net revenue rises monotonically and no dead zone
+can exist. Lawn Mowers & Snow Throwers is whole-price but the rate *drops* at
+$500, which is a cliff in the seller's favour rather than a leak.
 
 **Check the category, not the shelf.** The Amazon browse department a product
 appears under is *not* its referral category. Headbands returned by a search in

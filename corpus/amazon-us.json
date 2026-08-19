@@ -88,6 +88,99 @@
         ]
       },
 
+      "baby_products": {
+        "mode": "whole_price",
+        "_mode_confidence": "high — CONFIRMED against primary.",
+        "_source_tier": "primary",
+        "_sources": ["https://sell.amazon.com/pricing"],
+        "_retrieved": "2026-08-19",
+        "_verbatim": "8% for products with a total sales price of $10.00 or less, and 15% for products with a total sales price greater than $10.00",
+        "brackets": [
+          { "up_to_usd": 10.00, "rate": 0.08 },
+          { "up_to_usd": null,  "rate": 0.15 }
+        ]
+      },
+
+      "grocery_and_gourmet": {
+        "mode": "whole_price",
+        "_mode_confidence": "high — CONFIRMED against primary.",
+        "_source_tier": "primary",
+        "_sources": ["https://sell.amazon.com/pricing"],
+        "_retrieved": "2026-08-19",
+        "_verbatim": "8% for products with a total sales price of $15.00 or less, and 15% for products with a total sales price greater than $15.00",
+        "_why_it_matters": "The widest single dead zone we have found, and $15.99 — a ubiquitous price point in specialty food — sits inside it.",
+        "brackets": [
+          { "up_to_usd": 15.00, "rate": 0.08 },
+          { "up_to_usd": null,  "rate": 0.15 }
+        ]
+      },
+
+      "lawn_mowers_and_snow_throwers": {
+        "mode": "whole_price",
+        "_mode_confidence": "high — CONFIRMED against primary.",
+        "_source_tier": "primary",
+        "_sources": ["https://sell.amazon.com/pricing"],
+        "_retrieved": "2026-08-19",
+        "_verbatim": "15% for products with a total sales price of up to $500.00, and 8% for products with a total sales price greater than $500.00",
+        "_note": "Rate DROPS above the boundary, so this is the inverse of a dead zone — crossing $500.00 increases net revenue by about $35. No leak; a cliff in the seller's favour.",
+        "brackets": [
+          { "up_to_usd": 500.00, "rate": 0.15 },
+          { "up_to_usd": null,   "rate": 0.08 }
+        ]
+      },
+
+      "furniture": {
+        "mode": "marginal",
+        "_mode_confidence": "high — CONFIRMED against primary.",
+        "_source_tier": "primary",
+        "_sources": ["https://sell.amazon.com/pricing"],
+        "_retrieved": "2026-08-19",
+        "_verbatim": "15% for the portion of the total sales price up to $200.00, and 10% for any portion of the total sales price greater than $200.00",
+        "brackets": [
+          { "up_to_usd": 200.00, "rate": 0.15 },
+          { "up_to_usd": null,   "rate": 0.10 }
+        ]
+      },
+
+      "watches": {
+        "mode": "marginal",
+        "_mode_confidence": "high — CONFIRMED against primary.",
+        "_source_tier": "primary",
+        "_sources": ["https://sell.amazon.com/pricing"],
+        "_retrieved": "2026-08-19",
+        "_verbatim": "16% for the portion of the total sales price up to $1,500.00, 3% for any portion of the total sales price greater than $1,500.00",
+        "brackets": [
+          { "up_to_usd": 1500.00, "rate": 0.16 },
+          { "up_to_usd": null,    "rate": 0.03 }
+        ]
+      },
+
+      "appliances_compact": {
+        "mode": "marginal",
+        "_mode_confidence": "high — CONFIRMED against primary.",
+        "_source_tier": "primary",
+        "_sources": ["https://sell.amazon.com/pricing"],
+        "_retrieved": "2026-08-19",
+        "_verbatim": "15% for the portion of the total sales price up to $300.00, and 8% for any portion of the total sales price greater than $300.00",
+        "brackets": [
+          { "up_to_usd": 300.00, "rate": 0.15 },
+          { "up_to_usd": null,   "rate": 0.08 }
+        ]
+      },
+
+      "electronics_accessories": {
+        "mode": "marginal",
+        "_mode_confidence": "high — CONFIRMED against primary.",
+        "_source_tier": "primary",
+        "_sources": ["https://sell.amazon.com/pricing"],
+        "_retrieved": "2026-08-19",
+        "_verbatim": "15% for the portion of the total sales price up to $100.00, and 8% for any portion of the total sales price greater than $100.00",
+        "brackets": [
+          { "up_to_usd": 100.00, "rate": 0.15 },
+          { "up_to_usd": null,   "rate": 0.08 }
+        ]
+      },
+
       "jewelry": {
         "mode": "marginal",
         "_mode_confidence": "high — CONFIRMED against primary.",
